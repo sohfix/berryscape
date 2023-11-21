@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive App</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-rows: auto 1fr auto; /* Banner, Buttons, Time Display */
+            height: 100vh; /* Full height of the viewport */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .banner {
+            background-color: blue;
+            color: white;
+            font-size: 18px;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            grid-template-rows: repeat(2, 1fr); /* 2 rows */
+            gap: 10px;
+            padding: 10px;
+        }
+        .button-grid button {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .time-display {
+            font-family: 'Consolas', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: black;
+            color: yellow;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner" id="banner">JackPAIy</div>
+
+    <div class="button-grid">
+        <!-- Buttons -->
+        {% for i in range(1, 7) %}
+        <button onclick="alert('Button {{ i }} clicked')">Button {{ i }}</button>
+        {% endfor %}
+    </div>
+
+    <div class="time-display" id="time"></div>
+
+    <script>
+        // JavaScript for banner animation
+        function animateBanner() {
+            var banner = document.getElementById('banner');
+            var text = banner.innerHTML;
+            banner.innerHTML = text.substring(1) + text[0];
+            banner.style.animation = 'wiggle 0.5s'
+        }
+        setInterval(animateBanner, 500); // Adjust the speed of animation
+
+        // JavaScript for updating time
+        function updateTime() {
+            var now = new Date();
+            document.getElementById('time').innerHTML = now.toLocaleString();
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
